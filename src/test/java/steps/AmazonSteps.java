@@ -1,7 +1,7 @@
 package steps;
 
 import Pages.AmazonHomePage;
-import Pages.BasePage;
+import Pages.SearchResultsPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -16,12 +16,14 @@ public class AmazonSteps {
 
     WebDriver driver;
     AmazonHomePage amazonHomePage;
+    SearchResultsPage searchResultsPage;
 
     @Before()
     public void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         amazonHomePage = new AmazonHomePage(driver);
+        searchResultsPage = new SearchResultsPage(driver);
     }
 
     @After
@@ -41,12 +43,12 @@ public class AmazonSteps {
 
     @And("navigates to the second page")
     public void navigatesToTheSecondPage() {
-
+        searchResultsPage.getPage(2);
     }
 
     @And("he selects the third item")
     public void heSelectsTheThirdItem() {
-
+        searchResultsPage.selectItem(3);
     }
 
     @Then("the item would be available for purchase")
