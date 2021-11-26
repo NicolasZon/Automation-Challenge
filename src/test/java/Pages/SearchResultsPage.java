@@ -19,6 +19,7 @@ public class SearchResultsPage extends BasePage{
     }
 
     public void selectItem(int i) {
-        driver.findElements(data_results).get(3).click();
+        waitUntilNumberOfElementsBeMoreThan(data_results,i);
+        driver.findElements(data_results).get(i).click();
     }
 }
