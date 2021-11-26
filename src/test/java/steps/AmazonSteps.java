@@ -1,14 +1,33 @@
 package steps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class AmazonSteps {
+
+    WebDriver driver;
+
+    @Before()
+    public void setup() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+    }
+
+    @After
+    public void tearDown(){
+        driver.quit();
+    }
+
     @Given("the user navigates to the base page")
     public void theUserNavigatesToTheBasePage() {
-
+        driver.get("https://www.amazon.com/");
     }
 
     @When("he searches for {string}")
