@@ -1,5 +1,7 @@
 package steps;
 
+import Pages.AmazonHomePage;
+import Pages.BasePage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -13,11 +15,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class AmazonSteps {
 
     WebDriver driver;
+    AmazonHomePage amazonHomePage;
 
     @Before()
     public void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        amazonHomePage = new AmazonHomePage(driver);
     }
 
     @After
@@ -27,11 +31,12 @@ public class AmazonSteps {
 
     @Given("the user navigates to the base page")
     public void theUserNavigatesToTheBasePage() {
-        driver.get("https://www.amazon.com/");
+        amazonHomePage.getHomePage();
     }
 
     @When("he searches for {string}")
-    public void heSearchesFor(String arg0) {
+    public void heSearchesFor(String item) {
+        amazonHomePage.searchFor(item);
     }
 
     @And("navigates to the second page")
